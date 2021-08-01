@@ -1,15 +1,16 @@
 import { Component } from "react";
-import { ImSpades, ImHeart, ImClubs, ImDiamonds } from "react-icons/im/index";
+import Card from "./Card";
 
-const SPADES_SUIT_VALUE = 0;
-const HEARTS_SUIT_VALUE = 1;
-const CLUBS_SUIT_VALUE = 2;
-const DIAMONDS_SUIT_VALUE = 3;
-
-const SPADES_STRING = 'Spades';
-const HEARTS_STRING = 'Hearts';
-const CLUBS_STRING = 'Clubs';
-const DIAMONDS_STRING = 'Diamonds';
+import { 
+  SPADES_SUIT_VALUE,
+  HEARTS_SUIT_VALUE,
+  CLUBS_SUIT_VALUE,
+  DIAMONDS_SUIT_VALUE,
+  SPADES_STRING,
+  HEARTS_STRING,
+  CLUBS_STRING,
+  DIAMONDS_STRING
+} from "../../constants";
 
 class Main extends Component {
   constructor(props) {
@@ -106,21 +107,6 @@ class Main extends Component {
 
   }
 
-  getSuitIcon = value => {
-    switch (value) {
-      case SPADES_SUIT_VALUE:
-        return <ImSpades/>;
-      case HEARTS_SUIT_VALUE:
-        return <ImHeart color="#DB0000" />;
-      case CLUBS_SUIT_VALUE:
-        return <ImClubs/>;
-      case DIAMONDS_SUIT_VALUE:
-        return <ImDiamonds color="#DB0000" />;
-      default:
-        return null;
-    }
-  }
-
   shuffleDeck = array => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -149,59 +135,38 @@ class Main extends Component {
       <div className={'main'}>
         <div className={'blackjack-cards-wrapper'}>
           {
-            this.state.blackjackCards.reverse().map((card, index) => 
-              <>
-                <div key={`${card.value}-${index}`} className={'card'} onClick={() => console.log(card)}>
-                  <div className={'card-elements-wrapper'}>
-                    <div className={'card-markup-left'}>
-                      <label
-                          className={card.suit === DIAMONDS_SUIT_VALUE || card.suit === HEARTS_SUIT_VALUE ? 'red-suit-font-color' : ''}
-                        >
-                          {card.label}
-                        </label>
-                      <div className={'card-markup-suit-wrapper'}>{ this.getSuitIcon(card.suit) }</div>
-                    </div>
-                    <div className={'card-markup-right'}>
-                      <label
-                          className={card.suit === DIAMONDS_SUIT_VALUE || card.suit === HEARTS_SUIT_VALUE ? 'red-suit-font-color' : ''}
-                        >
-                          {card.label}
-                        </label>
-                      <div className={'card-markup-suit-wrapper'}>{ this.getSuitIcon(card.suit) }</div>
-                    </div>
-                    <div className={'card-content'}>
-                    </div>
-                  </div>
-                  {/* {
-                    !this.state.blackjackCards[index+1] &&
-                      <div>NEXT</div>
-                  } */}
-                </div>
-              </>
-            )
+            this.state.blackjackCards.reverse().map((card, index) => (
+              <Card 
+                key={`card-${index}`}
+                label={card.label}
+                value={card.value}
+                suit={card.suit}
+                suitLabel={card.suitLabel}
+              /> 
+            ))
           }
         </div>
         <div onClick={() => this.drawACard()}>DRAW A CARD</div>
-        <div className={'blackjack-cards-wrapper'}>
+        {/* <div className={'blackjack-cards-wrapper'}>
           {
             this.state.userCards.map((card, index) => 
               <>
                 <div key={`${card.value}-${index}`} className={'card'} onClick={() => console.log(card)}>
                   <div className={'card-elements-wrapper'}>
-                    {/* <div className="rectangle"></div>
+                    <div className="rectangle"></div>
                     <label
                       className={card.suit === DIAMONDS_SUIT_VALUE || card.suit === HEARTS_SUIT_VALUE ? 'red-suit-font-color' : ''}
                     >
                       {card.label}
                     </label>
-                    <div className={'icon-card-wrapper'}>{ this.getSuitIcon(card.suit) }</div> */}
+                    <div className={'icon-card-wrapper'}>{ this.getSuitIcon(card.suit) }</div> 
 
                   </div>
                 </div>
               </>
             )
           }
-        </div>
+        </div> */}
       </div>
     );
   }
