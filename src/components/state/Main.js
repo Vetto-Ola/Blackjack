@@ -133,32 +133,16 @@ class Main extends Component {
   render() { 
     return (
       <div className={'main'}>
-        <div className={'blackjack-cards-wrapper'}>
-          {
-            this.state.blackjackCards.reverse().map((card, index) => (
-              <Card 
-                key={`card-${index}`}
-                label={card.label}
-                value={card.value}
-                suit={card.suit}
-                suitLabel={card.suitLabel}
-              /> 
-            ))
-          }
-        </div>
-        <div onClick={() => this.drawACard()}>DRAW A CARD</div>
-        <div className={'blackjack-cards-wrapper'}>
-          {
-            this.state.userCards.map((card, index) => (
-              <Card 
-                key={`card-${index}`}
-                label={card.label}
-                value={card.value}
-                suit={card.suit}
-                suitLabel={card.suitLabel}
-              /> 
-            ))
-          }
+        <div className={'table-wood'}></div>
+        <div className={'table-carpet'}></div>
+        <div className={'screen-container'}>
+          <div className={'dealer-cards'}>
+            {
+              this.state.userCards.map(card => 
+                <Card value={card.value} label={card.label} suit={card.suit} suitLabel={card.suitLabel} />
+              )
+            }
+          </div>
         </div>
       </div>
     );

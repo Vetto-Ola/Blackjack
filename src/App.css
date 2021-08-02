@@ -1,8 +1,63 @@
 .main {
+  background: black;
+  width: 100vw;
+  height: 100vh;
+  /* max-width: 100vw;
+  max-height: 100vh; */
+  /* overflow: hidden; */
+}
+
+.table-wood {
+  z-index: 1;
+  background: #964B00;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%);
+  width: 170vh;
+  height: 95vh;
+  border-bottom-left-radius: 40%;
+  border-bottom-right-radius: 40%;
+}
+
+.table-carpet {
+  z-index: 2;
   background: #165b13;
-  min-height: 100vh;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%);
+  width: 160vh;
+  height: 90vh;
+  border: 1px solid black;
+  border-bottom-left-radius: 40%;
+  border-bottom-right-radius: 40%;
 }
 
 .blackjack-cards-wrapper {
   display: block;
+}
+
+.draw-a-card {
+  position: relative;
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  z-index: 5;
+  cursor: pointer;
+  display: inline;
+}
+
+.screen-container {
+  position: absolute;
+  z-index: 3;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.dealer-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

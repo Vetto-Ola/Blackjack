@@ -2,9 +2,11 @@
 .card {
   display: inline-block;
   position: relative;
-  width: 10rem;
-  margin: 1rem;
-  padding-top: 15rem;
+  width: 6rem;
+  padding-top: 9rem;
+  overflow: hidden;
+  border-radius: .5rem;
+  border: 1px solid black;
 }
 
 .card-elements-wrapper {
@@ -14,8 +16,6 @@
   top: 0;
   left: 0;
   background: white;
-  border-radius: .5rem;
-  border: 1px solid black;
 }
 
 .card-content {
@@ -54,7 +54,7 @@
   justify-content: center;
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
-  font-weight: bold;
+  font-weight: bolder;
   font-size: larger;
 }
 
@@ -81,12 +81,12 @@
 }
 
 .ace-content .column svg {
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .figure-content .column {
   font-family: serif;
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 .card-content-columns-container div {
@@ -99,11 +99,14 @@
   width: -webkit-fill-available;
 }
 
-.card-content-columns-container div div svg {
-  font-size: x-large;
+.card-content-columns-container div div svg, .suit-reverse svg {
+  font-size: 1.1rem;
 }
 
 .suit-reverse svg {
-  font-size: x-large;
   transform: rotate(180deg);
+}
+
+.suit-diamonds svg {
+  font-size: 1.3rem !important;
 }

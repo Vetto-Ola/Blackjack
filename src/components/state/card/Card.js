@@ -48,8 +48,8 @@ class Card extends Component {
       return (
         <div className={'card-content-columns-container'}>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
         </div>
       );
@@ -57,9 +57,9 @@ class Card extends Component {
       return (
         <div className={'card-content-columns-container'}>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
         </div>
       );
@@ -67,12 +67,12 @@ class Card extends Component {
       return (
         <div className={'card-content-columns-container'}>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
         </div>
       );
@@ -80,15 +80,15 @@ class Card extends Component {
       return (
         <div className={'card-content-columns-container'}>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
         </div>
       );
@@ -96,14 +96,14 @@ class Card extends Component {
       return (
         <div className={'card-content-columns-container'}>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
         </div>
       );
@@ -111,17 +111,17 @@ class Card extends Component {
       return (
         <div className={'card-content-columns-container'}>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
         </div>
       );
@@ -129,16 +129,16 @@ class Card extends Component {
       return (
         <div className={'card-content-columns-container'}>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
         </div>
       );
@@ -146,19 +146,19 @@ class Card extends Component {
       return (
         <div className={'card-content-columns-container'}>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
         </div>
       );
@@ -166,20 +166,20 @@ class Card extends Component {
       return (
         <div className={'card-content-columns-container'}>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
           <div className={'column'}>
-            <div>{ this.getSuitIcon() }</div>
-            <div>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
-            <div className={'suit-reverse'}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
+            <div className={`suit-reverse ${this.state.suit === DIAMONDS_SUIT_VALUE ? 'suit-diamonds' : ''}`}>{ this.getSuitIcon() }</div>
           </div>
         </div>
       );
