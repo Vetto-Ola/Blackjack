@@ -1,0 +1,109 @@
+
+.card {
+  display: inline-block;
+  position: relative;
+  width: 10rem;
+  margin: 1rem;
+  padding-top: 15rem;
+}
+
+.card-elements-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: white;
+  border-radius: .5rem;
+  border: 1px solid black;
+}
+
+.card-content {
+  position: relative;
+  display: block;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  margin-right: calc(100% / 5);
+  margin-left: calc(100% / 5);
+  margin-top: calc(100% / 6);
+  margin-bottom: calc(100% / 6);
+}
+
+.card-markup-left, .card-markup-right {
+  position: absolute;
+  display: block;
+  width: calc(100% / 5);
+  font-family: serif;
+}
+
+.card-markup-left {
+  left: 0rem;
+  top: 0rem;
+}
+
+.card-markup-right {
+  right: 0rem;
+  bottom: 0rem;
+  transform: rotate(180deg);
+}
+
+.card-markup-left label, .card-markup-right label {
+  position: relative;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.card-markup-suit-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.card-markup-suit-wrapper svg {
+  font-size: medium;
+}
+
+.red-suit-font-color {
+  color: #DB0000;
+}
+
+.ace-content, .figure-content, .card-content-columns-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: -webkit-fill-available;
+  align-items: center;
+}
+
+.ace-content .column svg {
+  font-size: 4rem;
+}
+
+.figure-content .column {
+  font-family: serif;
+  font-size: 5rem;
+}
+
+.card-content-columns-container div {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: -webkit-fill-available;
+}
+
+.card-content-columns-container div div svg {
+  font-size: x-large;
+}
+
+.suit-reverse svg {
+  font-size: x-large;
+  transform: rotate(180deg);
+}

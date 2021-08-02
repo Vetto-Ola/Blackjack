@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Card from "./Card";
+import Card from "./card/Card";
 
 import { 
   SPADES_SUIT_VALUE,
@@ -147,26 +147,19 @@ class Main extends Component {
           }
         </div>
         <div onClick={() => this.drawACard()}>DRAW A CARD</div>
-        {/* <div className={'blackjack-cards-wrapper'}>
+        <div className={'blackjack-cards-wrapper'}>
           {
-            this.state.userCards.map((card, index) => 
-              <>
-                <div key={`${card.value}-${index}`} className={'card'} onClick={() => console.log(card)}>
-                  <div className={'card-elements-wrapper'}>
-                    <div className="rectangle"></div>
-                    <label
-                      className={card.suit === DIAMONDS_SUIT_VALUE || card.suit === HEARTS_SUIT_VALUE ? 'red-suit-font-color' : ''}
-                    >
-                      {card.label}
-                    </label>
-                    <div className={'icon-card-wrapper'}>{ this.getSuitIcon(card.suit) }</div> 
-
-                  </div>
-                </div>
-              </>
-            )
+            this.state.userCards.map((card, index) => (
+              <Card 
+                key={`card-${index}`}
+                label={card.label}
+                value={card.value}
+                suit={card.suit}
+                suitLabel={card.suitLabel}
+              /> 
+            ))
           }
-        </div> */}
+        </div>
       </div>
     );
   }
