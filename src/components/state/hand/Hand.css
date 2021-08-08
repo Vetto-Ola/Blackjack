@@ -1,0 +1,32 @@
+.hand-container {
+  border: 4px solid white;
+  border-radius: .5rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
+
+.hand-wrapper {
+  position: relative;
+  height: 9rem;
+  transition: width .1s;
+  transition-timing-function: linear;
+}
+
+.hand-card-wrapper {
+  overflow: hidden;
+  animation-duration: 0.3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    height: 0%;
+  }
+
+  to {
+    height: 100%;
+  }
+}
