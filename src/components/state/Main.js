@@ -1,5 +1,6 @@
 import { Component } from "react";
-import Card from "./card/Card";
+// import Card from "./card/Card";
+import Hand from "./hand/Hand";
 
 import { 
   SPADES_SUIT_VALUE,
@@ -133,15 +134,10 @@ class Main extends Component {
   render() { 
     return (
       <div className={'main'}>
-        <div className={'table-wood'}></div>
-        <div className={'table-carpet'}></div>
         <div className={'screen-container'}>
-          <div className={'dealer-cards'}>
-            {
-              this.state.userCards.map(card => 
-                <Card value={card.value} label={card.label} suit={card.suit} suitLabel={card.suitLabel} />
-              )
-            }
+          <div className={'draw-a-card'} onClick={() => this.drawACard() }>draw card</div>
+          <div className={'hand-cards'}>
+            <Hand cards={this.state.userCards}/>
           </div>
         </div>
       </div>

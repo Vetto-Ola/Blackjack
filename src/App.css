@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .main {
   background: black;
   width: 100vw;
@@ -7,33 +11,6 @@
   /* overflow: hidden; */
 }
 
-.table-wood {
-  z-index: 1;
-  background: #964B00;
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translate(-50%);
-  width: 170vh;
-  height: 95vh;
-  border-bottom-left-radius: 40%;
-  border-bottom-right-radius: 40%;
-}
-
-.table-carpet {
-  z-index: 2;
-  background: #165b13;
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translate(-50%);
-  width: 160vh;
-  height: 90vh;
-  border: 1px solid black;
-  border-bottom-left-radius: 40%;
-  border-bottom-right-radius: 40%;
-}
-
 .blackjack-cards-wrapper {
   display: block;
 }
@@ -41,8 +18,9 @@
 .draw-a-card {
   position: relative;
   background: white;
-  padding: 1rem;
-  border-radius: 10px;
+  margin: 3rem;
+  padding: 0 2rem;
+  /* border-radius: 10px; */
   z-index: 5;
   cursor: pointer;
   display: inline;
@@ -53,11 +31,16 @@
   z-index: 3;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .dealer-cards {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hand-cards {
+  display: flex;
   justify-content: center;
 }
