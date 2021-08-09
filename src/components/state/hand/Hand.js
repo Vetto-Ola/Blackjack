@@ -2,6 +2,7 @@ import Card from "../card/Card";
 import "./Hand.css";
 import { Component } from "react";
 
+let MAX_VALID_VALUE = 21;
 // CSS card width
 let BASE_WIDTH = 6; 
 // left markup width
@@ -11,7 +12,8 @@ class Hand extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      
+      minHandValue: 0,
+      max: 0
     };
   }
 
@@ -27,9 +29,54 @@ class Hand extends Component {
 
   }
 
+  getHandScores = (cards=[]) => {
+    // first position contains minimum and second maximum
+    const total = [0, 0];
+    for (const card of cards) {
+      let aceFound = false;
+      if (card.value === 1 && !aceFound) {
+        total[0] = total[0] + 1;
+        total[1] = total[1] + 11;
+        aceFound = true;
+      } else {
+        total[0] = total[0] + card.value;
+        total[1] = total[1] + card.value;
+      }
+    }
+
+    if (this.props.retrieveHandValues) {
+      this.props.retrieveHandValues(total);
+    }
+
+    return total;
+  }
+
+  getHandScoreHtmlElemnt = () => {
+
+    const values = this.getHandScores(this.props.cards);
+
+    if (this.props.cards?.length) {
+      return (
+        <div className={`hand-score hand-score-${this.props.handScoreBottom ? 'bottom' : this.props.handScoreTop ? 'top' : '' }`}>
+          { 
+            ((values[0] !== values[1]) && (values[0] <= MAX_VALID_VALUE) && (values[1] <= MAX_VALID_VALUE))
+            ? this.props.cards.length === 2 && values[1] === MAX_VALID_VALUE
+            ? values[1]
+            :`${values[0]} / ${values[1]}`
+            : values[0]
+          }
+        </div>
+      );
+    }
+
+    return null;
+
+  }
+
   render() { 
     return ( 
       <div className={'hand-container'}>
+        { this.getHandScoreHtmlElemnt() }
         <div className={'hand-wrapper'} style={{ width: `${this.getHandWrapperWidth()}rem` }}>
           {
             !!this.props.cards?.length &&

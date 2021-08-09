@@ -137,7 +137,7 @@ class Main extends Component {
         <div className={'screen-container'}>
           <div className={'draw-a-card'} onClick={() => this.drawACard() }>draw card</div>
           <div className={'hand-cards'}>
-            <Hand cards={this.state.userCards}/>
+            <Hand cards={this.state.userCards} handScoreBottom />
           </div>
         </div>
       </div>
