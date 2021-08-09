@@ -18,7 +18,22 @@ class Main extends Component {
     super(props);
     this.state = {
       blackjackCards: [],
-      userCards: []
+
+      houseActive: false,
+      houseCards: [],
+      houseHandValues: [0, 0],
+
+      userActive: false,
+      userCards: [],
+      userHandValues: [0, 0],
+      stoppedAskingCards: false,
+
+      userActive2: false,
+      userCards2: [],
+      userHandValues2: [0, 0],
+      stoppedAskingCards2: false,
+      
+      split: false
     };
   }
 
@@ -36,7 +51,26 @@ class Main extends Component {
 
     const shuffledCards = this.shuffleDeck(allCards);
 
-    this.setState({ blackjackCards: shuffledCards });
+    this.setState({
+      blackjackCards: shuffledCards
+    }, () => {
+      this.getInitialHands();
+    });
+  }
+
+  getInitialHands = () => {
+    setTimeout(() => {
+      this.drawACard('userCards');
+    }, 350);
+    setTimeout(() => {
+      this.drawACard('houseCards');
+    }, 1200);
+    setTimeout(() => {
+      this.drawACard('userCards');
+    }, 1850);
+    setTimeout(() => {
+      this.setState({ userActive: true });
+    }, 2500);
   }
 
   createBlackJackDecks = () => {
@@ -118,26 +152,88 @@ class Main extends Component {
     return array;
   }
 
-  drawACard = () => {
-    const card = JSON.parse(JSON.stringify(this.state.blackjackCards[0]));
-    if (card) {
-      const blackjackCardsRemaining = JSON.parse(JSON.stringify(this.state.blackjackCards));
-      blackjackCardsRemaining.shift();
-  
-      this.setState({
-        blackjackCards: blackjackCardsRemaining,
-        userCards: [...this.state.userCards, card]
-      })
+  drawACard = (entityCards='') => {
+    if (entityCards) {
+      const card = JSON.parse(JSON.stringify(this.state.blackjackCards[0]));
+      if (card) {
+        const blackjackCardsRemaining = JSON.parse(JSON.stringify(this.state.blackjackCards));
+        blackjackCardsRemaining.shift();
+    
+        this.setState({
+          blackjackCards: blackjackCardsRemaining,
+          [entityCards]: [...this.state[entityCards], card]
+        })
+      }
     }
+  }
+
+  doSplit = () => {
+    this.setState({
+      split: true,
+      userActive: false,
+      userCards: [this.state.userCards[0]],
+      userCards2: [this.state.userCards[1]],
+    }, () => {
+      setTimeout(() => {
+        this.drawACard('userCards2');
+      }, 700);
+      setTimeout(() => {
+        this.drawACard('userCards');
+      }, 1500);
+      setTimeout(() => {
+        this.setState({ userActive2: true })
+      }, 2000);
+    })
+  }
+
+  retrieveHandValues = () => {
+    
   }
 
   render() { 
     return (
-      <div className={'main'}>
-        <div className={'screen-container'}>
-          <div className={'draw-a-card'} onClick={() => this.drawACard() }>draw card</div>
+      <div className={'main available'}>
+        <div className={'main-overlay'}></div>
+        <div className={'hand-block'}>
           <div className={'hand-cards'}>
-            <Hand cards={this.state.userCards} handScoreBottom />
+            <Hand
+              active={this.state.houseActive}
+              handScoreBottom
+              cards={this.state.houseCards}
+              drawACard={this.drawACard}
+              cardsField={'houseCards'}
+              stop
+            />
+          </div>
+        </div>
+        <div className={'hand-block'}>
+          {
+            this.state.split &&
+              <div className={'hand-cards user-hand-block'}>
+                <Hand
+                  active={this.state.userActive2}
+                  handScoreTop
+                  cards={this.state.userCards2}
+                  drawACard={this.drawACard}
+                  cardsField={'userCards2'}
+                  showControls
+                  stop
+                />
+              </div>
+          }
+          <div className={'hand-cards user-hand-block'}>
+            <Hand
+              active={this.state.userActive}
+              handScoreTop
+              cards={this.state.userCards}
+              drawACard={this.drawACard}
+              cardsField={'userCards'}
+              valuesField={'userHandValues'}
+              showControls
+              doSplit={ !this.state.split ? this.doSplit : undefined }
+              retrieveHandValues={this.retrieveHandValues}
+              stop
+            />
           </div>
         </div>
       </div>

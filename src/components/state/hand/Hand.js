@@ -12,8 +12,7 @@ class Hand extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      minHandValue: 0,
-      max: 0
+      values: []
     };
   }
 
@@ -48,10 +47,17 @@ class Hand extends Component {
       this.props.retrieveHandValues(total);
     }
 
+
+    if (total[0] !== this.state.values[0] && total[1] !== this.state.values[0]) {
+      this.setState({
+        values: total
+      })
+    }
+
     return total;
   }
 
-  getHandScoreHtmlElemnt = () => {
+  getHandScoreHtmlElement = () => {
 
     const values = this.getHandScores(this.props.cards);
 
@@ -75,8 +81,38 @@ class Hand extends Component {
 
   render() { 
     return ( 
-      <div className={'hand-container'}>
-        { this.getHandScoreHtmlElemnt() }
+      <div className={'hand-container'} 
+        style={{
+          borderColor: this.state.values[0] > MAX_VALID_VALUE && this.state.values[1] > MAX_VALID_VALUE && this.props.active
+          ? 'red' 
+          : this.props.active
+          ? 'yellow' 
+          : 'silver'
+        }}
+      >
+        { this.getHandScoreHtmlElement() }
+        {
+          this.props.active &&
+            <div className={'hand-controls'}>
+              {
+                typeof this.props.doSplit === 'function' && this.props.cards?.length === 2 && this.props.cards[0].value === this.props.cards[1].value &&
+                  <div onClick={() => this.props.doSplit()}>
+                    SPLIT
+                  </div>
+              }
+              {
+                (this.state.values[0] < MAX_VALID_VALUE && this.state.values[1] !== MAX_VALID_VALUE) &&
+                  <>
+                    <div onClick={() => this.props.drawACard(this.props.cardsField)}>
+                      DRAW
+                    </div>
+                    <div onClick={() => this.props.drawACard(this.props.cardsField)}>
+                      STOP
+                    </div>
+                  </>
+              }
+            </div>
+        }
         <div className={'hand-wrapper'} style={{ width: `${this.getHandWrapperWidth()}rem` }}>
           {
             !!this.props.cards?.length &&
