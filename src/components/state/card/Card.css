@@ -87,6 +87,8 @@
 .figure-content .column {
   font-family: serif;
   font-size: 4rem;
+  width: 100%;
+  height: 100%;
 }
 
 .card-content-columns-container div {
@@ -109,4 +111,16 @@
 
 .suit-diamonds svg {
   font-size: 1.3rem !important;
+}
+
+/* cards images */
+
+.card-content-k-hearts {
+  height: 100%;
+  width: 100%;
+  border: 1px solid black;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url(../../../assets/king-hearts.png);
 }

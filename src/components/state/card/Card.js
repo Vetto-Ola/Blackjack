@@ -7,6 +7,10 @@ import {
   HEARTS_SUIT_VALUE,
   CLUBS_SUIT_VALUE,
   DIAMONDS_SUIT_VALUE,
+  DIAMONDS_STRING,
+  HEARTS_STRING,
+  SPADES_STRING,
+  CLUBS_STRING
 } from "../../../constants";
 
 class Card extends Component {
@@ -33,6 +37,20 @@ class Card extends Component {
       default:
         return null;
     }
+  }
+
+   getImageCardsContent = (cardLabel="", suit) => {
+
+    let suitString = ""; 
+
+    if (suit === HEARTS_SUIT_VALUE) {
+      suitString = HEARTS_STRING;
+    } else {
+      suitString = "undefined"
+    }
+
+
+    return <div className={`card-content-${cardLabel.toLocaleLowerCase()}-${suitString.toLocaleLowerCase()}`}></div>;
   }
 
   getCardContent = () => {
@@ -187,7 +205,7 @@ class Card extends Component {
       return (
         <div className={'figure-content'}>
           <div className={`column ${this.state.suit === DIAMONDS_SUIT_VALUE || this.state.suit === HEARTS_SUIT_VALUE ? 'red-suit-font-color' : ''}`}>
-            { this.state.label }
+            { this.getImageCardsContent(this.state.label, this.state.suit) }
           </div>
         </div>
       );
