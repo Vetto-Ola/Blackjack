@@ -86,7 +86,7 @@ class Main extends Component {
       const newDeck = [];
 
       for (let suitIndex = 0; suitIndex < 4; suitIndex++) {
-        for (let cardIndex = 1; cardIndex < 14; cardIndex++) {
+        for (let cardIndex = 1; cardIndex < 5; cardIndex++) {
 
           let newCard = {
             label: '',
@@ -157,8 +157,8 @@ class Main extends Component {
     return array;
   }
 
-  drawACard = (entityCards='') => {
-    if (entityCards && !this.state.blockDrawACard) {
+  drawACard = (entityCards='', manual=false) => {
+    if (entityCards) {
       const card = JSON.parse(JSON.stringify(this.state.blackjackCards[0]));
       if (card) {
         this.setState({
@@ -181,8 +181,9 @@ class Main extends Component {
                 : entityCards === 'userCards2'
                 ? 'userHandValues2'
                 : 'unknownHandValues'
-              }`]: this.getHandScores(this.state[entityCards]),
-              blockDrawACard: false
+              }`]: this.getHandScores(this.state[entityCards])
+            }, () => {
+              this.stopHandAndGoNext();
             })
           })
 
@@ -197,6 +198,8 @@ class Main extends Component {
       userActive: false,
       userCards: [this.state.userCards[0]],
       userCards2: [this.state.userCards[1]],
+      userHandValues: this.getHandScores([this.state.userCards[0]]),
+      userHandValues2: this.getHandScores([this.state.userCards[1]])
     }, () => {
       setTimeout(() => {
         this.drawACard('userCards2');
@@ -210,28 +213,38 @@ class Main extends Component {
     })
   }
 
-  retrieveHandValues = () => {
-
-    // userHandValues:
-    // userHandValues2:
-
-  }
-
   stopHandAndGoNext = manual => {
     if (manual) {
       if (this.state.split) {
-
+        if (this.state.userActive2) {
+          this.setState({
+            userActive: true,
+            userActive2: false,
+            blockDrawACard: false
+          }, () => {
+            setTimeout(() => {
+              this.drawACard('userCards');
+            }, 350);
+          })
+        } else if (this.state.userActive) {
+          this.setState({
+            userActive: false,
+            houseActive: true,
+            blockDrawACard: false
+          })
+        }
       } else {
         if (this.state.userActive) {
           this.setState({
             userActive: false,
-            houseActive: true,
+            houseActive: true
           })
         } else {
           // show win / lose
         }
       }
     } else {
+      this.setState({ blockDrawACard: false });
       if (this.state.split) {
         if (this.state.userActive2) {
           this.setState({
@@ -254,8 +267,8 @@ class Main extends Component {
   getHandScores = (cards=[]) => {
     // first position contains minimum and second maximum
     const total = [0, 0];
+    let aceFound = false;
     for (const card of cards) {
-      let aceFound = false;
       if (card.value === 1 && !aceFound) {
         total[0] = total[0] + 1;
         total[1] = total[1] + 11;
@@ -296,7 +309,8 @@ class Main extends Component {
                   drawACard={this.drawACard}
                   cardsField={'userCards2'}
                   showControls
-                  stop
+                  stop={this.stopHandAndGoNext}
+                  blockDrawACard={this.state.blockDrawACard}
                 />
               </div>
           }
@@ -310,8 +324,8 @@ class Main extends Component {
               valuesField={'userHandValues'}
               showControls
               doSplit={ !this.state.split ? this.doSplit : undefined }
-              retrieveHandValues={this.retrieveHandValues}
               stop={this.stopHandAndGoNext}
+              blockDrawACard={this.state.blockDrawACard}
             />
           </div>
         </div>

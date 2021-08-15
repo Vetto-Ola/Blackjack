@@ -32,8 +32,8 @@ class Hand extends Component {
   getHandScores = (cards=[]) => {
     // first position contains minimum and second maximum
     const total = [0, 0];
+    let aceFound = false;
     for (const card of cards) {
-      let aceFound = false;
       if (card.value === 1 && !aceFound) {
         total[0] = total[0] + 1;
         total[1] = total[1] + 11;
@@ -43,11 +43,6 @@ class Hand extends Component {
         total[1] = total[1] + card.value;
       }
     }
-
-    if (this.props.retrieveHandValues) {
-      this.props.retrieveHandValues(total);
-    }
-
 
     if (total[0] !== this.state.values[0] && total[1] !== this.state.values[0]) {
       this.setState({
@@ -98,7 +93,7 @@ class Hand extends Component {
       >
         { this.getHandScoreHtmlElement() }
         {
-          this.props.active && this.props.showControls &&
+          this.props.active && this.props.showControls && this.props.cards?.length >= 2 &&
             <div className={'hand-controls'}>
               {
                 typeof this.props.doSplit === 'function' && this.props.cards?.length === 2 && this.props.cards[0].value === this.props.cards[1].value &&
@@ -109,7 +104,11 @@ class Hand extends Component {
               {
                 (this.state.values[0] < MAX_VALID_VALUE && this.state.values[1] !== MAX_VALID_VALUE) &&
                   <>
-                    <div onClick={() => this.props.drawACard(this.props.cardsField)}>
+                    <div onClick={() => {
+                      if (!this.props.blockDrawACard) {
+                        this.props.drawACard(this.props.cardsField, true);
+                      }
+                    }}>
                       DRAW
                     </div>
                     <div onClick={() => this.props.stop(true)}>
