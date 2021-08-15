@@ -83,10 +83,13 @@ class Hand extends Component {
     return ( 
       <div className={'hand-container'} 
         style={{
-          borderColor: this.state.values[0] > MAX_VALID_VALUE && this.state.values[1] > MAX_VALID_VALUE && this.props.active
+          borderColor: 
+          (this.state.values[0] === MAX_VALID_VALUE || this.state.values[1] === MAX_VALID_VALUE) && this.props.cards?.length === 2
+          ? 'limegreen'
+          : this.state.values[0] > MAX_VALID_VALUE && this.state.values[1] > MAX_VALID_VALUE && this.props.active
           ? 'red' 
           : this.props.active
-          ? 'yellow' 
+          ? 'yellow'
           : 'silver'
         }}
       >

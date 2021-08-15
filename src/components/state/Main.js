@@ -38,9 +38,12 @@ class Main extends Component {
   }
 
   componentDidMount()  {
+    this.initializeGame();
+  }
+
+  initializeGame = () => {
     const decks = this.createBlackJackDecks();
 
-    console.log(decks);
     let allCards = [];
 
     for (let index = 0; index < decks.length; index++) {
@@ -189,6 +192,22 @@ class Main extends Component {
   retrieveHandValues = () => {
     
   }
+
+  // stopHand = () => {
+  //   if (this.state.split) {
+  //     if (this.state.userActive2) {
+  //       this.setState({
+  //         userActive: user
+  //       })
+  //     } else if (this.state.userActive) {
+
+  //     } else {
+
+  //     }
+  //   } else {
+
+  //   }
+  // }
 
   render() { 
     return (
