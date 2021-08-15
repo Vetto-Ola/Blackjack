@@ -10,7 +10,8 @@ import {
   SPADES_STRING,
   HEARTS_STRING,
   CLUBS_STRING,
-  DIAMONDS_STRING
+  DIAMONDS_STRING,
+  MAX_VALID_VALUE
 } from "../../constants";
 
 class Main extends Component {
@@ -33,7 +34,8 @@ class Main extends Component {
       userHandValues2: [0, 0],
       stoppedAskingCards2: false,
       
-      split: false
+      split: false,
+      blockDrawACard: false
     };
   }
 
@@ -156,15 +158,34 @@ class Main extends Component {
   }
 
   drawACard = (entityCards='') => {
-    if (entityCards) {
+    if (entityCards && !this.state.blockDrawACard) {
       const card = JSON.parse(JSON.stringify(this.state.blackjackCards[0]));
       if (card) {
-        const blackjackCardsRemaining = JSON.parse(JSON.stringify(this.state.blackjackCards));
-        blackjackCardsRemaining.shift();
-    
         this.setState({
-          blackjackCards: blackjackCardsRemaining,
-          [entityCards]: [...this.state[entityCards], card]
+          blockDrawACard: true
+        }, () => {
+
+          const blackjackCardsRemaining = JSON.parse(JSON.stringify(this.state.blackjackCards));
+          blackjackCardsRemaining.shift();
+
+          this.setState({
+            blackjackCards: blackjackCardsRemaining,
+            [entityCards]: [...this.state[entityCards], card],
+          }, () => {
+            this.setState({
+              [`${
+                entityCards === 'houseCards'
+                ? 'houseHandValues'
+                : entityCards === 'userCards'
+                ? 'userHandValues'
+                : entityCards === 'userCards2'
+                ? 'userHandValues2'
+                : 'unknownHandValues'
+              }`]: this.getHandScores(this.state[entityCards]),
+              blockDrawACard: false
+            })
+          })
+
         })
       }
     }
@@ -180,34 +201,73 @@ class Main extends Component {
       setTimeout(() => {
         this.drawACard('userCards2');
       }, 700);
-      setTimeout(() => {
-        this.drawACard('userCards');
-      }, 1500);
+      // setTimeout(() => {
+      //   this.drawACard('userCards');
+      // }, 1500);
       setTimeout(() => {
         this.setState({ userActive2: true })
-      }, 2000);
+      }, 1500);
     })
   }
 
   retrieveHandValues = () => {
-    
+
+    // userHandValues:
+    // userHandValues2:
+
   }
 
-  // stopHand = () => {
-  //   if (this.state.split) {
-  //     if (this.state.userActive2) {
-  //       this.setState({
-  //         userActive: user
-  //       })
-  //     } else if (this.state.userActive) {
+  stopHandAndGoNext = manual => {
+    if (manual) {
+      if (this.state.split) {
 
-  //     } else {
+      } else {
+        if (this.state.userActive) {
+          this.setState({
+            userActive: false,
+            houseActive: true,
+          })
+        } else {
+          // show win / lose
+        }
+      }
+    } else {
+      if (this.state.split) {
+        if (this.state.userActive2) {
+          this.setState({
+            userActive: false
+          })
+        } else if (this.state.userActive) {
+  
+        } else {
+  
+        }
+      } else {
+        let userHasLost = false;
+        // if () {
+  
+        // }
+      }
+    }
+  }
 
-  //     }
-  //   } else {
+  getHandScores = (cards=[]) => {
+    // first position contains minimum and second maximum
+    const total = [0, 0];
+    for (const card of cards) {
+      let aceFound = false;
+      if (card.value === 1 && !aceFound) {
+        total[0] = total[0] + 1;
+        total[1] = total[1] + 11;
+        aceFound = true;
+      } else {
+        total[0] = total[0] + card.value;
+        total[1] = total[1] + card.value;
+      }
+    }
 
-  //   }
-  // }
+    return total;
+  }
 
   render() { 
     return (
@@ -251,7 +311,7 @@ class Main extends Component {
               showControls
               doSplit={ !this.state.split ? this.doSplit : undefined }
               retrieveHandValues={this.retrieveHandValues}
-              stop
+              stop={this.stopHandAndGoNext}
             />
           </div>
         </div>

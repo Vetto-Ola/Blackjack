@@ -1,8 +1,9 @@
 import Card from "../card/Card";
 import "./Hand.css";
 import { Component } from "react";
+import { MAX_VALID_VALUE } from "../../../constants";
 
-let MAX_VALID_VALUE = 21;
+
 // CSS card width
 let BASE_WIDTH = 6; 
 // left markup width
@@ -65,7 +66,9 @@ class Hand extends Component {
       return (
         <div className={`hand-score hand-score-${this.props.handScoreBottom ? 'bottom' : this.props.handScoreTop ? 'top' : '' }`}>
           { 
-            ((values[0] !== values[1]) && (values[0] <= MAX_VALID_VALUE) && (values[1] <= MAX_VALID_VALUE))
+            ((values[0] === MAX_VALID_VALUE) || (values[1] === MAX_VALID_VALUE))
+            ? `${MAX_VALID_VALUE}`
+            : ((values[0] !== values[1]) && (values[0] <= MAX_VALID_VALUE) && (values[1] <= MAX_VALID_VALUE))
             ? this.props.cards.length === 2 && values[1] === MAX_VALID_VALUE
             ? values[1]
             :`${values[0]} / ${values[1]}`
@@ -95,7 +98,7 @@ class Hand extends Component {
       >
         { this.getHandScoreHtmlElement() }
         {
-          this.props.active &&
+          this.props.active && this.props.showControls &&
             <div className={'hand-controls'}>
               {
                 typeof this.props.doSplit === 'function' && this.props.cards?.length === 2 && this.props.cards[0].value === this.props.cards[1].value &&
@@ -109,7 +112,7 @@ class Hand extends Component {
                     <div onClick={() => this.props.drawACard(this.props.cardsField)}>
                       DRAW
                     </div>
-                    <div onClick={() => this.props.drawACard(this.props.cardsField)}>
+                    <div onClick={() => this.props.stop(true)}>
                       STOP
                     </div>
                   </>

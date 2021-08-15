@@ -8,3 +8,5 @@ export const HEARTS_STRING = 'Hearts';
 export const CLUBS_STRING = 'Clubs';
 export const DIAMONDS_STRING = 'Diamonds';
 
+export const MAX_VALID_VALUE = 21;
+
