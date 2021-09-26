@@ -35,15 +35,24 @@ class Main extends Component {
       stoppedAskingCards2: false,
       
       split: false,
-      blockDrawACard: false
+      blockDrawACard: false,
+      showResults: false
     };
   }
 
   componentDidMount()  {
     this.initializeGame();
+    const timer = setInterval(this.automatedProcesses, 1000);
+  }
+
+  automatedProcesses = () => {
+    if (this.state.houseActive) {
+      this.drawACard('houseCards');
+    }
   }
 
   initializeGame = () => {
+
     const decks = this.createBlackJackDecks();
 
     let allCards = [];
@@ -71,11 +80,10 @@ class Main extends Component {
       this.drawACard('houseCards');
     }, 1200);
     setTimeout(() => {
-      this.drawACard('userCards');
+      this.setState({ userActive: true },
+        () => this.drawACard('userCards')
+      );
     }, 1850);
-    setTimeout(() => {
-      this.setState({ userActive: true });
-    }, 2500);
   }
 
   createBlackJackDecks = () => {
@@ -86,7 +94,7 @@ class Main extends Component {
       const newDeck = [];
 
       for (let suitIndex = 0; suitIndex < 4; suitIndex++) {
-        for (let cardIndex = 1; cardIndex < 5; cardIndex++) {
+        for (let cardIndex = 1; cardIndex < 14; cardIndex++) {
 
           let newCard = {
             label: '',
@@ -204,9 +212,6 @@ class Main extends Component {
       setTimeout(() => {
         this.drawACard('userCards2');
       }, 700);
-      // setTimeout(() => {
-      //   this.drawACard('userCards');
-      // }, 1500);
       setTimeout(() => {
         this.setState({ userActive2: true })
       }, 1500);
@@ -237,14 +242,15 @@ class Main extends Component {
         if (this.state.userActive) {
           this.setState({
             userActive: false,
-            houseActive: true
+            houseActive: true,
+            blockDrawACard: false
           })
         } else {
           // show win / lose
         }
       }
     } else {
-      this.setState({ blockDrawACard: false });
+      console.log("automated cards checking ")
       if (this.state.split) {
         if (this.state.userActive2) {
           this.setState({
@@ -256,10 +262,37 @@ class Main extends Component {
   
         }
       } else {
-        let userHasLost = false;
-        // if () {
-  
-        // }
+        if (this.state.userActive) {
+          if (this.state.userHandValues[0] === MAX_VALID_VALUE || this.state.userHandValues[1] === MAX_VALID_VALUE) {
+            this.setState({
+              userActive: false,
+              houseActive: true,
+              blockDrawACard: false
+            })
+          } else if (this.state.userHandValues[0] > MAX_VALID_VALUE && this.state.userHandValues[1] > MAX_VALID_VALUE) {
+            this.setState({ 
+              showResults: true, 
+              blockDrawACard: false 
+            });
+          } else {
+            this.setState({ blockDrawACard: false });
+          }
+
+        } else if (this.state.houseActive) {
+          console.log("HOUSE ACTIVE NO SPLIT ");
+          console.log(`${this.state.houseHandValues[0]} >= 17 --> ${this.state.houseHandValues[0] >= 17}, ${this.state.houseHandValues[1]} >= 17 ---> ${this.state.houseHandValues[1] >= 17}`);
+          if (
+            (this.state.houseHandValues[0] >= MAX_VALID_VALUE && this.state.houseHandValues[1] >= MAX_VALID_VALUE) || 
+            (this.state.houseHandValues[0] >= 17 && this.state.houseHandValues[0] <= MAX_VALID_VALUE) ||
+            (this.state.houseHandValues[1] >= 17 && this.state.houseHandValues[1] <= MAX_VALID_VALUE)
+          ) {
+            this.setState({
+              showResults: true,
+              houseActive: false,
+              blockDrawACard: false
+            })
+          }
+        }
       }
     }
   }

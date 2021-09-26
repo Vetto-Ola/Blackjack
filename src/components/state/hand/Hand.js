@@ -84,7 +84,7 @@ class Hand extends Component {
           borderColor: 
           (this.state.values[0] === MAX_VALID_VALUE || this.state.values[1] === MAX_VALID_VALUE) && this.props.cards?.length === 2
           ? 'limegreen'
-          : this.state.values[0] > MAX_VALID_VALUE && this.state.values[1] > MAX_VALID_VALUE && this.props.active
+          : this.state.values[0] > MAX_VALID_VALUE && this.state.values[1] > MAX_VALID_VALUE
           ? 'red' 
           : this.props.active
           ? 'yellow'
